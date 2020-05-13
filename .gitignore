@@ -1,0 +1,13 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs
+/Demo/obj
+/Demo/Properties
+/Demo/Startup.cs
+/Demo/Program.cs
+/Demo/Demo.csproj
+/Demo/appsettings.json
+/Demo/appsettings.Development.json
+/y2ui.sln
