@@ -3,11 +3,5 @@
 ################################################################################
 
 /.vs
-/Demo/obj
-/Demo/Properties
-/Demo/Startup.cs
-/Demo/Program.cs
-/Demo/Demo.csproj
-/Demo/appsettings.json
-/Demo/appsettings.Development.json
 /y2ui.sln
+/Demo/Web.config

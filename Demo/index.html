@@ -2,9 +2,88 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>演示</title>
+    <link href="Scripts/layui/css/layui.css" rel="stylesheet" />
+    <link href="Scripts/y2ui/y2ui.css" rel="stylesheet" />
 </head>
 <body>
-
+    <div id="y2ui"></div> <!--指定作用位置-->
+    <script src="Scripts/layui/layui.all.js"></script>
+    <script src="Scripts/y2ui/y2ui.js"></script>
 </body>
 </html>
+
+<script>
+    //加载模板
+    $$.load();
+
+    //新建元素（可以显示元素）
+    $$.input("condition1", "新增列名：");
+    $$.input("condition2", "表格位置：");
+    $$.list("condition3", "选择信息：", [
+        new Option("", "请选择"),
+        new Option("1", "1"),
+        new Option("2", "2"),
+        new Option("3", "3")
+    ]);
+    $$.button("btn1", "替换表格", function (e) {
+        $$("table").sldata.all = {
+            cols: [[
+                { field: 'MXNAME', title: '规格型号' },
+                { field: 'NOTES', title: '备注', width: 200, align: 'left' },
+                { fixed: 'right', toolbar: '#operate', title: '操作', width: 120 }
+            ]]
+        };
+    });
+    $$.button("btn2", "添加一行数据", function (e) {
+        $$("table").sldata.data.push({
+            MXNAME: "4564654645"
+        });
+    });
+    $$.button("btn3", "减去一行数据", function (e) {
+        $$("table").sldata.data.splice($$("table").sldata.data.length - 1, 1);
+    });
+    $$.button("btn4", "增加列", function (e) {
+        $$("table").sldata.cols[0].push(
+            { field: 'MXNAME', title: $$("condition1").val() }
+        );
+    });
+    $$.button("btn5", "减去列", function (e) {
+        $$("table").sldata.cols[0].splice($$("table").sldata.cols[0].length - 1, 1);
+    });
+    $$.button("btn6", "隐藏", function (e) {
+        $$("table").remove();
+    });
+    $$.button("btn7", "显示", function (e) {
+        $$.show("display", Number($$("condition2").val()), $$("table"));
+    });
+    $$.table(
+        "table",
+        [],
+        [[
+            { fixed: 'left', type: 'checkbox', width: 50 },
+            { fixed: 'left', type: 'numbers', title: '序号' },
+            { field: 'MXNAME', title: '规格型号' },
+            { field: 'NOTES', title: '备注', width: 200, align: 'left' },
+            { fixed: 'right', toolbar: '#operate', title: '操作', width: 120 }
+        ]]
+    );
+
+    //组合元素（可以显示元素，新建元素）
+    $$.toLine("line1", [$$("condition1"), $$("condition2")]);
+    $$.toLine("line2", [$$("condition3")]);
+
+    //显示元素（可以新建元素，组合元素）
+    $$.show("breadcrumb", $$.breadcrumb("breadcrumb", ["首页", "演示"]));
+    $$.show("display", $$("line1"), $$("line2"), $$("table"));
+    $$.show("control", $$("btn1"), $$("btn2"), $$("btn3"), $$("btn4"), $$("btn5"), $$("btn6"), $$("btn7"));
+
+    //元素内容增删改
+    $$("condition1").input.setAttribute("placeholder", "请输入");
+    $$("condition1").val("asd");
+
+    //元素事件增删改
+    $$("condition3").on(function (data) {
+        layui.layer.msg("您选择了" + data.value);
+    });
+</script>
